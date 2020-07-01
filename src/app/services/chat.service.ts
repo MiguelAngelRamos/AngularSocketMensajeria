@@ -15,16 +15,24 @@ export class ChatService {
       de: this.wsService.getUsuario().nombre,
       cuerpo: mensaje
     };
-    this.wsService.emit('mensaje', payload);
+    this.wsService.emit( 'mensaje' , payload);
   }
 
   getMessages<T>(): Observable<T>
   {
-    return this.wsService.listen('mensaje-nuevo');
+    return this.wsService.listen( 'mensaje-nuevo' );
   }
 
   getMessagesPrivate<T>(): Observable<T>
   {
-    return this.wsService.listen('mensaje-privado');
+    return this.wsService.listen( 'mensaje-privado' );
+  }
+
+  getUsuariosActivos<T>(): Observable<T> {
+    return this.wsService.listen( 'usuarios-activos' );
+  }
+
+  emitirUsuariosActivos(): void {
+    this.wsService.emit('obtener-usuarios');
   }
 }
